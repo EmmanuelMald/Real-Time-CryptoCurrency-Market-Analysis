@@ -8,6 +8,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+    "pre-commit>=4.2.0",
     "pydantic>=2.11.5",
     "pydantic-settings>=2.9.1",
 ]
@@ -16,6 +17,7 @@ gcp = [
     "google-auth>=2.38.0",
     "google-cloud-bigquery>=3.31.0",
     "google-cloud-iam>=2.19.0",
+    "google-cloud-pubsub>=2.30.0",
     "google-cloud-run>=0.10.17",
     "google-cloud-secret-manager>=2.23.2",
     "google-cloud-storage>=3.1.0",
@@ -23,4 +25,7 @@ gcp = [
 notebooks = [
     "dotenv>=0.9.9",
     "ipykernel>=6.29.5",
+]
+api = [
+    "requests>=2.32.4",
 ]
