@@ -23,6 +23,7 @@ gcp = [
     "google-cloud-run>=0.10.17",
     "google-cloud-secret-manager>=2.23.2",
     "google-cloud-storage>=3.1.0",
+    "setuptools>=80.9.0",
 ]
 notebooks = [
     "dotenv>=0.9.9",
