@@ -24,3 +24,9 @@ class GCPConfig(BaseSettings):
             default="real_time_crypto_pipeline",
         ),
     ]
+    DATASET_NAME: Annotated[
+        str, Field(description="BigQuery dataset name", default="crypto_data")
+    ]
+    TABLE_NAME: Annotated[
+        str, Field(description="BigQuery table name", default="crypto_prices")
+    ]
