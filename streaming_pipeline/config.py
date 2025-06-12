@@ -15,5 +15,12 @@ class GCPConfig(BaseSettings):
         ),
     ]
     PUBSUB_TOPIC_CRYPTO: Annotated[
-        str, Field(description="GCP Pub/Sub topic name", default="crypto-data-stream")
+        str, Field(description="GCP Pub/Sub topic name", default="crypto-data-topic")
+    ]
+    BUCKET_NAME: Annotated[
+        str,
+        Field(
+            description="Main GCP bucket of the project",
+            default="real_time_crypto_pipeline",
+        ),
     ]
