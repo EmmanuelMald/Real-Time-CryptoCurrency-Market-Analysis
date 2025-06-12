@@ -25,3 +25,6 @@ run-dataflow-pipeline:
 	--setup_file=./setup.py \
 	--job_name "crypto-streaming" \
 	--streaming
+
+run-publisher:
+	uv run python -m streaming_pipeline.publisher
