@@ -29,3 +29,15 @@ variable "pubsub_topic_name" {
   description = "Name of the Pub/Sub topic to be created"
   default     = "crypto-data-topic"
 }
+
+variable "bq_dataset_name" {
+  type        = string
+  description = "Name of the BigQuery dataset to be created"
+  default     = "crypto_data"
+}
+
+variable "bq_crypto_prices_table" {
+  type        = string
+  description = "Name of the BigQuery table to be created"
+  default     = "crypto_prices"
+}
