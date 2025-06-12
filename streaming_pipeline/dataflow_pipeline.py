@@ -1,25 +1,29 @@
 import argparse
 import apache_beam as beam
+from loguru import logger
 from apache_beam.options.pipeline_options import PipelineOptions
 from streaming_pipeline.config import GCPConfig
-from streaming_pipeline.pipeline_auxiliars import ParseMessage
+from streaming_pipeline.pipeline_auxiliars import ParseMessage, LogMessage
 
 gcp_config = GCPConfig()
 
 
 def run():
     # Set up command line argument parsing
+    logger.info("Setting up command line arguments")
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--output_table",
         required=False,
         help='The BigQuery table to write to in the format "project:dataset.table"',
-        default=f"{gcp_config.PROJECT_ID}:{gcp_config.DATASET_NAME}.{gcp_config.TABLE_NAME}",
+        default=f"{gcp_config.PROJECT_ID}.{gcp_config.DATASET_NAME}.{gcp_config.TABLE_NAME}",
     )
 
     # Parse known arguments and pipeline options
     known_args, pipeline_args = parser.parse_known_args()
+    logger.info(f"Parsed arguments: {known_args}")
+    logger.info(f"Pipeline arguments: {pipeline_args}")
 
     pipeline_options = PipelineOptions(pipeline_args)
 
@@ -32,8 +36,10 @@ def run():
             | "ReadFromPubSub"
             >> beam.io.ReadFromPubSub(
                 topic=f"projects/{gcp_config.PROJECT_ID}/topics/{gcp_config.PUBSUB_TOPIC_CRYPTO}"
-            ).with_output_types(bytes)
+            )
         )
+        # Step 1.1: Log the incoming messages
+        _ = messages | "LogMessages" >> beam.ParDo(LogMessage())
 
         # Step 2: Prase the JSON message
         parsed_data = messages | "ParseMessages" >> beam.ParDo(ParseMessage())
