@@ -40,3 +40,10 @@ class CryptoConfig(BaseSettings):
             default="https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd",
         ),
     ]
+    PUBLISH_INTERVAL_SECONDS: Annotated[
+        int,
+        Field(
+            description="Interval in seconds between API calls to publish data",
+            default=60,
+        ),
+    ]
