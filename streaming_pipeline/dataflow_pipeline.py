@@ -1,7 +1,6 @@
 import argparse
 import apache_beam as beam
 from apache_beam.options.pipeline_options import PipelineOptions
-from loguru import logger
 from streaming_pipeline.config import GCPConfig
 from streaming_pipeline.pipeline_auxiliars import ParseMessage
 
@@ -52,5 +51,4 @@ def run():
 
 
 if __name__ == "__main__":
-    logger.getLogger().setLevel(logger.INFO)
     run()
