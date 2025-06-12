@@ -26,3 +26,14 @@ class ParseMessage(beam.DoFn):
 
         except Exception as e:
             logger.error(f"Failed to parse message:{e}")
+
+
+class LogMessage(beam.DoFn):
+    """
+    Logs the incoming PubSub message
+    """
+
+    def process(self, element: bytes):
+        message_body = element.decode("utf-8")
+        logger.info(f"Received message: {message_body}")
+        yield element
