@@ -30,3 +30,13 @@ class GCPConfig(BaseSettings):
     TABLE_NAME: Annotated[
         str, Field(description="BigQuery table name", default="crypto_prices")
     ]
+
+
+class CryptoConfig(BaseSettings):
+    CRYPTO_API_URL: Annotated[
+        str,
+        Field(
+            description="Crypto API URL",
+            default="https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd",
+        ),
+    ]
